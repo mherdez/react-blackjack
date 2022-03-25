@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import createDeck from './createDeck';
 
 // DECLARATION OF VARIABLES
@@ -53,26 +54,74 @@ const stopPlaying = () => {
 	turnDealer();
 };
 
+// SHOW WINNER
+const showWinner = (winner) => {
+	const message = winner === 'player' ? '¡¡¡ GANASTE !!!' : 'El Curpier ganó';
+	if (winner === 'dealer') {
+		Swal.fire({
+			title: message,
+			// icon: 'error',
+			confirmButtonText: 'Suerte para la próxima',
+			backdrop: `
+				rgba(0,0,0,0.5)
+				url("./assets/dealer.gif")
+				center top
+				no-repeat
+			`,
+		});
+	} else {
+		Swal.fire({
+			title: message,
+			// icon: 'success',
+			confirmButtonText: '¡Eso es todo Campeón!',
+			backdrop: `
+			rgba(0,0,0,0.5)
+			url("./assets/winner.gif")
+			center top
+			no-repeat
+			`,
+		});
+	}
+	setBtns(1, 0, 0);
+
+	return null;
+};
+
 // DEALER'S TURN TO PLAY
 const turnDealer = () => {
-	const card = deck.shift();
-
 	if (playerScore > 21) {
+		const card = deck.shift();
 		dealerScore += valueCard(card);
 		showCards(`#dealerCards`, card);
-		showScore(`#dealerScore`, playerScore);
-		showWinner('dealer');
+		showScore(`#dealerScore`, dealerScore);
 		setTimeout(() => {
-			setBtns(1, 0, 0);
-		}, 3000);
+			showWinner('dealer');
+		}, 500);
 		return;
 	}
 
-	// SHOW WINNER
-	const showWinner = (winner) => {
-		winner === 'player' ? 'El Jugador ganó' : 'El Curpier ganó';
-		return true;
-	};
+	const i = setInterval(() => {
+		const card = deck.shift();
+		dealerScore += valueCard(card);
+		showCards(`#dealerCards`, card);
+		showScore(`#dealerScore`, dealerScore);
+
+		if (dealerScore > 21) {
+			clearInterval(i);
+			setTimeout(() => {
+				showWinner('player');
+			}, 750);
+			return;
+		}
+
+		if (dealerScore <= 21 && dealerScore >= playerScore) {
+			clearInterval(i);
+			setTimeout(() => {
+				showWinner('dealer');
+			}, 750);
+			return;
+		}
+	}, 500);
 };
 
 // ++++++++++ VARIOUS FUNCTIONS ++++++++++ //

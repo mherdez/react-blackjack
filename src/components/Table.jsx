@@ -3,7 +3,7 @@ import BettingBox from './BettingBox';
 
 const Table = () => {
 	return (
-		<div className="table my-5 mx-auto w-75">
+		<div className="table my-5 mx-auto">
 			<BettingBox place="player" />
 			<BettingBox place="dealer" />
 		</div>
