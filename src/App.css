@@ -2,3 +2,17 @@ body {
 	background: rgb(27, 75, 3);
 	color: white;
 }
+.table {
+}
+.betting-box {
+	border: 5px dashed indianred;
+	min-height: 400px;
+}
+.betting-box-cards img {
+	width: 200px;
+	height: 300px;
+
+	position: relative;
+	left: 150px;
+	margin-left: -150px;
+}

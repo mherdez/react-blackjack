@@ -6,7 +6,7 @@ let setBtn1 = () => {};
 let setBtn2 = () => {};
 let setBtn3 = () => {};
 let playerScore = 0;
-let computerScore = 0;
+let dealerScore = 0;
 
 // NEW GAME FUNCTION
 const newGame = ([[, setB1], [, setB2], [, setB3]]) => {
@@ -27,7 +27,12 @@ const newGame = ([[, setB1], [, setB2], [, setB3]]) => {
 const getCards = () => {
 	const card = deck.shift();
 	const value = valueCard(card);
-	console.log(card, value, deck);
+
+	const src = './assets/cartas/';
+	console.log(`<img src="${src}${card}.png" alt="${card}" />`);
+	document.querySelector(
+		'#playerCards'
+	).innerHTML += `<img src="${src}${card}.png" alt="${card}" />`;
 };
 
 // STOP PLAYING FUNCTION

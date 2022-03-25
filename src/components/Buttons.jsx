@@ -29,7 +29,7 @@ const Buttons = () => {
 	];
 
 	return (
-		<div className="my-3 mx-auto text-center">
+		<div className="mt-4 mx-auto text-center">
 			{buttons.map(({ texto, color, funcion, state }, index) => {
 				return (
 					<Button
