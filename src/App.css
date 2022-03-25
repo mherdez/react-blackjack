@@ -5,7 +5,7 @@ body {
 .table {
 }
 .betting-box {
-	border: 5px dashed indianred;
+	border: 2px ridge cyan;
 	min-height: 400px;
 }
 .betting-box-cards img {
