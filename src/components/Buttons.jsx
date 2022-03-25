@@ -1,42 +1,36 @@
 import { useState } from 'react';
 import Button from './Button';
-import { nuevoJuego, pedirCarta, detenerse } from './funciones.js';
+import { newGame, getCards, stopPlaying } from './functions.js';
 
 const Buttons = () => {
-	const stateBtns = [];
-	stateBtns.push(useState(true));
-	stateBtns.push(useState(false));
-	stateBtns.push(useState(false));
+	const stateBtns = [useState(true), useState(false), useState(false)];
 
-	const botones = [
+	const buttons = [
 		{
 			texto: 'Nuevo juego',
 			color: 'primary',
 			funcion: () => {
-				nuevoJuego(stateBtns);
+				newGame(stateBtns);
 			},
-			// state: stateBtn1[0],
-			// setState: stateBtn1[1],
+			state: stateBtns[0][0],
 		},
 		{
 			texto: 'Pedir carta',
 			color: 'primary',
-			funcion: pedirCarta,
-			// state: stateBtn2[0],
-			// setState: stateBtn2[1],
+			funcion: getCards,
+			state: stateBtns[1][0],
 		},
 		{
-			texto: 'Nuevo juego',
+			texto: 'Detenerse',
 			color: 'danger',
-			funcion: detenerse,
-			// state: stateBtn3[0],
-			// setState: stateBtn3[1],
+			funcion: () => stopPlaying(stateBtns),
+			state: stateBtns[2][0],
 		},
 	];
 
 	return (
 		<div className="my-3 mx-auto text-center">
-			{botones.map(({ texto, color, funcion, state, setState }, index) => {
+			{buttons.map(({ texto, color, funcion, state }, index) => {
 				return (
 					<Button
 						texto={texto}

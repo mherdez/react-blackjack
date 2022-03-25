@@ -5,7 +5,6 @@ const Button = ({
 		console.log(texto);
 	},
 	state = true,
-	setState,
 }) => {
 	return (
 		<button
